@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Josh McCormick" />
+
+<meta name="date" content="2022-05-11" />
+
+<title>Package Introduction</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Package Introduction</h1>
+<h4 class="author">Josh McCormick</h4>
+<h4 class="date">May 11, 2022</h4>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terminaldigits)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<p>The package <code>terminaldigits</code> implements simulated tests of
+uniformity and independence for terminal digits.
+<code>terminaldigits</code> also implements Monte Carlo simulations for
+type I errors and power (under certain deviations) for the test of
+independence. Simulations are run in C++ utilizing Rcpp.</p>
+<div id="uniformity" class="section level2">
+<h2>Uniformity</h2>
+<p>When numbers are recorded with sufficient precision, for a wide range
+of data generating processes, terminal digits are uniformly distributed
+(Preece, 1981). For a generalization of Benford’s law to terminal
+digits, see Hill (1995). Deviations uniformity could indicate data
+quality issues. <code>terminaldigits</code> utilizes Pearson’s
+chi-squared test of goodness-of-fit to assess the hypothesis that
+terminal digits are uniformly distributed. Rather than rely on the
+asymptotic approximation to the chi-squared distribution,
+<code>terminaldigits</code> utilizes the simulated chi-squared GOF test
+from the package <code>discretefit</code>.</p>
+<p>Examples are based on a data set taken from the third round of a
+decoy experiment involving hand-washing purportedly carried out in a
+number of factories in China. For details, see <code>decoy</code> and
+Yu, Nelson, and Simonsohn (2018).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">td_uniformity</span>(decoy<span class="sc">$</span>weight, <span class="at">decimals =</span> <span class="dv">2</span>, <span class="at">reps =</span> <span class="dv">2000</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Pearson&#39;s chi-squared GOF test for uniformity of terminal digits</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data:  decoy$weight</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chi-squared = 539.67, p-value = 0.0004998</span></span></code></pre></div>
+</div>
+<div id="independence" class="section level2">
+<h2>Independence</h2>
+<p>Additionally, when numbers are recorded with sufficient precision,
+for a wide range of data generating processes, terminal digits are
+independent of preceding digits. Simonsohn expressed a version of this
+assumption in his procedure ‘number bunching’ (2019). Here the idea is
+formalized as a test of independence conducted on a contingency table
+constructed by counts for preceding digits and terminal digits. As a toy
+example, take the data set {1.1, 1.1, 1.2, 1.3, 1.3, 2.0, 2.1, 2.4}.
+Table 1 presents counts for each unique preceding digit and terminal
+digit.</p>
+<div id="hvuiidvepp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#hvuiidvepp .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hvuiidvepp .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hvuiidvepp .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hvuiidvepp .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hvuiidvepp .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hvuiidvepp .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hvuiidvepp .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hvuiidvepp .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hvuiidvepp .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hvuiidvepp .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hvuiidvepp .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hvuiidvepp .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hvuiidvepp .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hvuiidvepp .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hvuiidvepp .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hvuiidvepp .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hvuiidvepp .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hvuiidvepp .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hvuiidvepp .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hvuiidvepp .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hvuiidvepp .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hvuiidvepp .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hvuiidvepp .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hvuiidvepp .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hvuiidvepp .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hvuiidvepp .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hvuiidvepp .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hvuiidvepp .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hvuiidvepp .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hvuiidvepp .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hvuiidvepp .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hvuiidvepp .gt_left {
+  text-align: left;
+}
+
+#hvuiidvepp .gt_center {
+  text-align: center;
+}
+
+#hvuiidvepp .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hvuiidvepp .gt_font_normal {
+  font-weight: normal;
+}
+
+#hvuiidvepp .gt_font_bold {
+  font-weight: bold;
+}
+
+#hvuiidvepp .gt_font_italic {
+  font-style: italic;
+}
+
+#hvuiidvepp .gt_super {
+  font-size: 65%;
+}
+
+#hvuiidvepp .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#hvuiidvepp .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#hvuiidvepp .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hvuiidvepp .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#hvuiidvepp .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#hvuiidvepp .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="7" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Contingecy table for toy data set</th>
+    </tr>
+    
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1">Preceding Digits</th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="5">
+        <span class="gt_column_spanner">Terminal Digit</span>
+      </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="2" colspan="1">Total</th>
+    </tr>
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">0</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">1</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">2</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">3</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">4</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">5</td></tr>
+    <tr><td class="gt_row gt_left">2</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">3</td></tr>
+    <tr><td class="gt_row gt_left">Total</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">3</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">2</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_right">8</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+<p>With fixed margins, the marginal probability for row <span class="math inline">\(r_i\)</span> equals the sum across each cell in
+<span class="math inline">\(r_i\)</span> divided by <span class="math inline">\(n\)</span>, the total number of observations, and
+the margin for column <span class="math inline">\(c_j\)</span> equals
+the sum across each cell in <span class="math inline">\(c_j\)</span>
+divided by <span class="math inline">\(n\)</span>. The expected fraction
+for cell <span class="math inline">\(r_ic_j\)</span> is the product of
+the marginal probability for <span class="math inline">\(r_i\)</span>
+and <span class="math inline">\(c_j\)</span>. We express this expected
+fraction as <span class="math inline">\(p_{ij}\)</span> and the observed
+fraction as <span class="math inline">\(q_{ij}\)</span>.</p>
+<p>Having defined the expected distribution, we can compare the expected
+fractions to the observed fractions to assess the null hypothesis, that
+preceding digits (rows) are independent of terminal digits (columns).
+Formally, this hypothesis is expressed as follows:</p>
+<p><span class="math display">\[
+H_0: p_{ij} = q_{ij} \ for \ all  \ (i, j) \\
+H_1: p_{ij} \neq  q_{ij} \ for \ at \ least \ one \ (i, j)
+\]</span> The function <code>td_independence</code> conducts this test
+utilizing one of the following four statistics. Pearson’s chi-squared
+statistic:</p>
+<p><span class="math display">\[
+X^2 = n \sum_{i} \sum_j \frac{(q_{ij} - p_{ij})^2} {p_{ij}} \tag{8}
+\]</span> The log-likelihood ratio statistic, also referred to as <span class="math inline">\(G^2\)</span>, is defined as follows under the
+convention that <span class="math inline">\(q_{ij}\)</span> ln(<span class="math inline">\(\frac{q_{ij}} {p_{ij}}\)</span>) = 0 when <span class="math inline">\(q_{ij}\)</span> = 0.</p>
+<p><span class="math display">\[
+G^2 = 2n \sum_{i} \sum_j q_{ij} \ln(\frac{q_{ij}} {p_{ij}})
+\tag{9}
+\]</span> The Freeman-Tukey statistic, also referred to as Hellinger
+distance, is defined as follows.</p>
+<p><span class="math display">\[ FT = 4n \sum_{i} \sum_j (\sqrt{q_{ij}}
+- \sqrt{p_{ij}})^2 \tag{10}\]</span> The root-mean-square statistic (see
+Perkins, William, Mark Tygert, and Rachel Ward, 2011). <span class="math display">\[ RMS = \sqrt{N^{-1} \sum_{i} \sum_j (q_{ij} -
+p_{ij})^2} \tag{11} \]</span> Asymptotically, the first three of these
+statistic approximate the chi-squared distribution with degrees of
+freedom <span class="math inline">\((r - 1) \times (c - 1)\)</span> but
+as contingency tables generated under this procedure may be sparse,
+<code>td_independence</code> calculates p-values based Monte Carlo
+simulations under the null hypothesis. The algorithm introduced by
+Agresti, Wackerly, and Boyett (1979) is utilized. See also Boyett
+(1979).</p>
+<p>As an example, again take the <code>decoy</code> data set. There is
+strong evidence here that terminal digits are not independent of
+preceding digits.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">td_independence</span>(decoy<span class="sc">$</span>weight, <span class="at">decimals =</span> <span class="dv">2</span>, <span class="at">reps =</span> <span class="dv">2000</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Chisq test for independence of terminal digits</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; data:  decoy$weight</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chisq = 6422.4, p-value = 0.0004998</span></span></code></pre></div>
+</div>
+<div id="simulations" class="section level2">
+<h2>Simulations</h2>
+<p>Some data generating process produce terminal digits that are
+dependent on preceding digits, e.g. normal distributions with small
+standard deviations recorded only to the first decimal place. In fact,
+the dependence of terminal digits (in some cases) is a corollary of
+Benford’s law (Hill, 1995). Thus, care must be taken in applying the
+test of independence.</p>
+<p>One possibility is to simulate type I errors under a given data
+generating process. The <code>decoy</code> data approximates a normal
+distribution with a mean of ~54 and standard deviation of ~15.</p>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<p>The <code>td_simulate</code> function can draw samples from a normal
+distribution with the given mean and standard deviation. For each draw,
+the test of independence is applied. This provides type I errors. For
+the traditional significance level of 0.05, approximately 5 percent of
+draws should be statistically significant but not more.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">td_simulate</span>(<span class="st">&quot;normal&quot;</span>, <span class="at">n =</span> <span class="dv">3235</span>, </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">parameter_1 =</span> <span class="dv">54</span>, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">parameter_2 =</span> <span class="dv">14</span>, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">decimals =</span> <span class="dv">2</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">significance =</span> <span class="fl">0.05</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">reps =</span> <span class="dv">100</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">simulations =</span> <span class="dv">100</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $method</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Monte Carlo simulations for independence of terminal digits&quot;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $distribution</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;normal&quot;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $Chisq</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.03</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $G2</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.02</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $FT</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.02</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $RMS</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.01</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $O</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.03</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $AF</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.01</span></span></code></pre></div>
+<p>These results suggest that the assumption of independence is
+appropriate for the specified data generating process though such a
+conclusion should be based on a much larger number of simulations.</p>
+<p><code>td_simulate</code> can also be used to estimate power for
+deviations from independence introduced by (randomly) duplicating
+observations. For example, take the above specified data generating
+process and duplicate two percent of cases.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">td_simulate</span>(<span class="st">&quot;normal&quot;</span>, <span class="at">n =</span> <span class="dv">3235</span>, </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">parameter_1 =</span> <span class="dv">54</span>, </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">parameter_2 =</span> <span class="dv">14</span>, </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">duplicates =</span> <span class="fl">0.02</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">decimals =</span> <span class="dv">2</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">significance =</span> <span class="fl">0.05</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">reps =</span> <span class="dv">100</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">simulations =</span> <span class="dv">100</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $method</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Monte Carlo simulations for independence of terminal digits&quot;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $distribution</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;normal&quot;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $Chisq</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.56</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $G2</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.52</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $FT</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.5</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $RMS</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.52</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $O</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.5</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $AF</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.51</span></span></code></pre></div>
+<p>These results suggest that the chi-squared test might be the most
+powerful test but again this would need to be confirmed through a larger
+number of simulations.</p>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p>Agresti, A., Wackerly, D., &amp; Boyett, J. M. (1979). Exact
+conditional tests for cross-classifications: approximation of attained
+significance levels. Psychometrika, 44(1), 75-83.</p>
+<p>Boyett, J. M. (1979). Algorithm AS 144: Random r × c tables with
+given row and column totals. Journal of the Royal Statistical Society.
+Series C (Applied Statistics), 28(3), 329-332.</p>
+<p>Hill, T. P. (1995). The Significant-Digit Phenomenon. The American
+Mathematical Monthly, 102(4), 322–327. <a href="https://doi.org/10.2307/2974952" class="uri">https://doi.org/10.2307/2974952</a></p>
+<p>Perkins, W., Tygert, M., &amp; Ward, R. (2011). Computing the
+confidence levels for a root-mean-square test of goodness-of-fit.
+Applied Mathematics and Computation, 217(22), 9072-9084. <a href="https://doi.org/10.1016/j.amc.2011.03.124" class="uri">https://doi.org/10.1016/j.amc.2011.03.124</a></p>
+<p>Preece, D. A. (1981). Distributions of Final Digits in Data. Journal
+of the Royal Statistical Society. Series D (The Statistician), 30(1),
+31–60. <a href="https://doi.org/10.2307/2987702" class="uri">https://doi.org/10.2307/2987702</a></p>
+<p>Simonsohn, U. (2019, May 25). “Number-Bunching: A New Tool for
+Forensic Data Analysis.” DataColoda 77. <a href="http://datacolada.org/77" class="uri">http://datacolada.org/77</a></p>
+<p>Yu, F., Nelson, L., &amp; Simonsohn, U. (2018, December 5). “In Press
+at Psychological Science: A New ‘Nudge’ Supported by Implausible Data.”
+DataColoda 74. <a href="http://datacolada.org/74" class="uri">http://datacolada.org/74</a></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
